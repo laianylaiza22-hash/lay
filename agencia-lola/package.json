@@ -1,0 +1,14 @@
+{
+  "name": "agencia-lola-silva",
+  "version": "2.0.0",
+  "description": "Sistema de gestao da Agencia Lola Silva - login real, permissoes e banco de dados SQLite",
+  "main": "server.js",
+  "engines": { "node": ">=18" },
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

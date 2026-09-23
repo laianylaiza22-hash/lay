@@ -1,0 +1,37 @@
+AGENCIA LOLA SILVA - VERSAO 2 (login + banco de dados)
+=====================================================
+
+ETAPA 2: login real com 4 usuarios, permissoes Administrador/Operador
+e banco de dados SQLite (os dados ficam no arquivo agencialola.db,
+nao dependem mais do navegador).
+
+COMO RODAR NO WINDOWS
+1. Instale o Node.js LTS em https://nodejs.org (versao 18 ou maior).
+2. Extraia esta pasta e abra o Prompt de Comando dentro dela.
+3. Rode:  npm install
+4. Rode:  npm start
+5. Abra no navegador:  http://localhost:3000
+
+USUARIOS INICIAIS (troque as senhas depois de entrar)
+  lola     / lola123     -> Administrador
+  alex     / alex123     -> Operador
+  equipe2  / equipe123   -> Operador
+  equipe3  / equipe123   -> Operador
+
+PERMISSOES
+  Administrador: tudo (dashboard, clientes, caixa, relatorios,
+                 gerenciar usuarios, backup, excluir registros).
+  Operador: dashboard, clientes (cadastrar/editar), caixa
+            (lancar movimentacoes), relatorios.
+            Nao acessa Usuarios nem Backup e nao exclui registros.
+
+BANCO DE DADOS
+  Arquivo: agencialola.db (criado automaticamente na primeira execucao).
+  Tabelas: users, clients, cash.
+  Para levar os dados para outro computador, copie o arquivo .db
+  ou use Backup > Exportar JSON (somente admin).
+
+SEGURANCA
+  - Senhas com hash bcrypt, sessoes com token JWT (12h).
+  - Para producao, defina a variavel de ambiente JWT_SECRET com um
+    valor secreto antes de iniciar:  set JWT_SECRET=um-valor-secreto

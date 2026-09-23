@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agência Lola Silva</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="loginScreen" class="login-wrap hidden">
+  <div class="login-card">
+    <img src="logo-lola.jpeg" alt="Agência Lola Silva" class="login-logo">
+    <h1>Agência Lola Silva</h1>
+    <p class="muted">Entre com seu usuário e senha</p>
+    <label>Usuário<input type="text" id="loginUser" autocomplete="username"></label>
+    <label>Senha<input type="password" id="loginPass" autocomplete="current-password"></label>
+    <div id="loginError" class="error hidden"></div>
+    <button class="primary full" id="loginBtn">Entrar</button>
+    <p class="muted small">Acesso inicial: lola / lola123 (administrador)</p>
+  </div>
+</div>
+
+<div id="appScreen" class="app hidden">
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo-lola.jpeg" alt="Agência Lola Silva">
+      <div>
+        <div class="brand-name">Agência Lola Silva</div>
+        <div class="brand-subtitle">Gestão de clientes e caixa</div>
+      </div>
+    </div>
+    <div class="profile-area">
+      <img id="headerPhoto" class="avatar" src="" alt="Foto">
+      <div class="profile-text">
+        <strong id="headerName"></strong>
+        <span id="headerEmail"></span>
+        <span id="headerRole" class="role-badge"></span>
+      </div>
+      <button class="ghost" id="logoutBtn" title="Sair">Sair</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+
+      <section id="page-dashboard" class="page">
+        <h1>Olá, <span id="dashName"></span>!</h1>
+        <p class="muted">Bem-vindo ao sistema da Agência Lola Silva.</p>
+        <div class="cards">
+          <div class="card"><span>Saldo do caixa</span><strong id="dBalance">R$ 0,00</strong></div>
+          <div class="card"><span>Total de entradas</span><strong id="dIn">R$ 0,00</strong></div>
+          <div class="card"><span>Total de saídas</span><strong id="dOut">R$ 0,00</strong></div>
+          <div class="card"><span>Clientes</span><strong id="dClients">0</strong></div>
+        </div>
+        <div class="panel">
+          <h2>Últimas movimentações</h2>
+          <div id="dashRecent" class="list"></div>
+        </div>
+      </section>
+
+      <section id="page-clientes" class="page hidden">
+        <h1>Clientes</h1>
+        <div class="panel">
+          <h2 id="clientFormTitle">Cadastrar cliente</h2>
+          <input type="hidden" id="clientId">
+          <div class="form-grid">
+            <label>Nome*<input type="text" id="clientName"></label>
+            <label>Telefone<input type="text" id="clientPhone"></label>
+            <label>E-mail<input type="text" id="clientEmail"></label>
+            <label>Instagram<input type="text" id="clientInstagram"></label>
+            <label class="wide">Endereço<input type="text" id="clientAddress"></label>
+          </div>
+          <button class="primary" id="saveClient">Salvar cliente</button>
+          <button class="ghost hidden" id="cancelClient">Cancelar edição</button>
+        </div>
+        <div class="panel">
+          <h2>Clientes cadastrados</h2>
+          <input class="search" id="clientSearch" type="text" placeholder="Pesquisar por nome, telefone ou Instagram">
+          <div id="clientList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="page-caixa" class="page hidden">
+        <h1>Caixa</h1>
+        <div class="panel">
+          <h2>Nova movimentação</h2>
+          <div class="form-grid">
+            <label>Tipo<select id="cashType"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></label>
+            <label>Valor<input type="text" id="cashValue" placeholder="0,00"></label>
+            <label>Data<input type="date" id="cashDate"></label>
+            <label>Descrição<input type="text" id="cashDescription"></label>
+          </div>
+          <button class="primary" id="addCash">Registrar movimentação</button>
+        </div>
+        <div class="panel">
+          <h2>Resumo</h2>
+          <div class="cash-summary">
+            <div><span>Entradas</span><strong id="cashIn">R$ 0,00</strong></div>
+            <div><span>Saídas</span><strong id="cashOut">R$ 0,00</strong></div>
+            <div><span>Saldo</span><strong id="cashBalance">R$ 0,00</strong></div>
+          </div>
+          <div id="cashList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="page-relatorios" class="page hidden">
+        <h1>Relatórios</h1>
+        <div class="panel">
+          <h2>Filtros</h2>
+          <div class="form-grid">
+            <label>Período<select id="repPeriod"><option value="all">Todos</option><option value="today">Hoje</option><option value="week">Esta semana</option><option value="month">Este mês</option></select></label>
+            <label>Tipo<select id="repType"><option value="all">Todas</option><option value="entrada">Entradas</option><option value="saida">Saídas</option></select></label>
+          </div>
+          <button class="primary" id="repExport">Exportar CSV</button>
+        </div>
+        <div class="cards three">
+          <div class="card"><span>Total de entradas</span><strong id="repIn">R$ 0,00</strong></div>
+          <div class="card"><span>Total de saídas</span><strong id="repOut">R$ 0,00</strong></div>
+          <div class="card"><span>Resultado</span><strong id="repBalance">R$ 0,00</strong></div>
+        </div>
+        <div class="panel">
+          <h2>Movimentações</h2>
+          <div id="repList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="page-usuarios" class="page hidden">
+        <h1>Usuários</h1>
+        <div class="panel">
+          <h2 id="userFormTitle">Novo usuário</h2>
+          <input type="hidden" id="userId">
+          <div class="form-grid">
+            <label>Nome*<input type="text" id="userName"></label>
+            <label>Usuário (login)*<input type="text" id="userUsername"></label>
+            <label>E-mail<input type="text" id="userEmail"></label>
+            <label>Perfil<select id="userRole"><option value="operator">Operador</option><option value="admin">Administrador</option></select></label>
+            <label>Senha*<input type="password" id="userPassword" placeholder="Obrigatória ao criar"></label>
+            <label>Foto<input type="file" id="userPhoto" accept="image/*"></label>
+          </div>
+          <button class="primary" id="saveUser">Salvar usuário</button>
+          <button class="ghost hidden" id="cancelUser">Cancelar edição</button>
+        </div>
+        <div class="panel">
+          <h2>Usuários cadastrados</h2>
+          <div id="userList" class="list"></div>
+        </div>
+        <div class="panel">
+          <h2>Meu perfil</h2>
+          <div class="form-grid">
+            <label>Nome<input type="text" id="meName"></label>
+            <label>E-mail<input type="text" id="meEmail"></label>
+            <label>Nova senha<input type="password" id="mePassword" placeholder="Deixe em branco para manter"></label>
+            <label>Foto<input type="file" id="mePhoto" accept="image/*"></label>
+          </div>
+          <button class="primary" id="saveMe">Atualizar meu perfil</button>
+        </div>
+      </section>
+
+      <section id="page-backup" class="page hidden">
+        <h1>Backup</h1>
+        <div class="panel">
+          <h2>Dados do banco</h2>
+          <p class="muted">Os dados ficam no arquivo <strong>agencialola.db</strong> (banco SQLite), não dependem do navegador.</p>
+          <button class="primary" id="exportBackup">Exportar backup (JSON)</button>
+          <label class="file-button">Restaurar backup<input type="file" id="importBackup" accept=".json"></label>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
